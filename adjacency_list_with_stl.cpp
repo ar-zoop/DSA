@@ -10,8 +10,9 @@ void addEdge(vector <int> adj[], int u, int v){
 void printGraph(vector <int> adj[], int V){
     for (int i=0;i<V;i++){
         cout<<i<<"->";
-        for (auto x: adj[i])
+        for (auto x: adj[i]){
             cout<<x<<" ";
+        }
         cout<<endl;
     }
 }
