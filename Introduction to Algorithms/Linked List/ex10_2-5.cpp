@@ -1,79 +1,80 @@
 #include <bits/stdc++.h>
 using  namespace std;
 
-typedef struct link_node{
-    string key;
-    // int value;
-    struct link_node* next;
-}node;
+typedef struct LinkNode
+{   struct LinkNode *next;
+    int data;
+} node;
 
-node *senti, *temp;
+node *temp, *senti;
 
+void createnode()
+{
+    temp = (node *)malloc(sizeof(node));
+}
 
-void insert_node(){
-    node *tmp = (node *)malloc(sizeof(node));
-    cout << "hello";
-    
-    temp=tmp;
+void insert(int ele)
+{
+    createnode();
+    temp->data = ele;
     temp->next = senti->next;
     senti->next = temp;
-    cout<<"Enter key: ";
-    cin>>temp->key;
-    // temp->value=1;
-    return;
 }
 
-void delete_node(){
-    string ele;
-    cout<<"Enter ele to delete: ";
-    cin>>ele;
-    node * i=senti, *j;
-    while(i->key!=ele && i->next!=senti){
-        j=i;
-        i=i->next;
+node* search(int ele){
+    node *forward=senti;
+    node* backup;
+    while(forward->next!=senti && forward->data!=ele){
+        backup=forward;
+        forward = forward->next;
     }
-    if(i->key==ele){
-        j->next=i->next;
-        free(i);
-        i=NULL;
-        cout<<"Element delete"<<endl;
+    if (forward->data == ele)
+    {
+        cout<<"element found"<<endl;
+        return backup;
     }
     else{
-        cout<<"Element not found"<<endl;
+        cout<<"element not found"<<endl;
+        return NULL;
     }
-
 }
 
-void search(){
-    string ele;
-    cout << "Enter ele to search: ";
-    cin >> ele;
-    node *i = senti, *j;
-    while (i->key != ele && i->next != senti)
-    {
-        j = i;
-        i = i->next;
-    }
-    if (i->key == ele)
-    {
-        cout<<"Element found"<<endl;
+void delete_node(int ele){
+    temp=search(ele);
+    if(temp==NULL){
+        cout<<"element not found"<<endl;
     }
     else{
-        cout << "Element not found" << endl;
+        node*to_free;
+        to_free=temp->next;
+        temp->next=to_free->next;
+        free(to_free);
+        to_free=NULL;
     }
+}
+
+void display()
+{
+    node *tmp = senti->next;
+    while (tmp != senti)
+    {
+        cout << tmp->data << " ";
+        tmp = tmp->next;
+    }
+    cout << "\n";
 }
 
 int main(){
-    senti = (node*)malloc(sizeof(node));
-    senti->next=senti;
-    senti->key="-1";
-    // senti->value=-1O;   
-    insert_node();
-    insert_node();
-    insert_node();
-    search();
-    delete_node();
-    search();
-
+    senti = (node *)malloc(sizeof(node));
+    senti->next = senti;
+    insert(1);
+    display();
+    search(1);
+    insert(2);
+    search(2);
+    display();
+    delete_node(1);
+    search(1);
+    display();
     return 0;
 } 
