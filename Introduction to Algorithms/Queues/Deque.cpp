@@ -2,16 +2,16 @@
 #define MAX 5
 using namespace std;
 
-int f=-1, r=-1;
+int front=-1, rear=-1;
 
 void fenqueue(vector<int> &deque, int data)
 {
-    if(f==-1){
-        deque[++f]=data;
-        r++;
+    if(front==-1){
+        deque[++front]=data;
+        rear++;
     }
-    else if(f>0){
-        deque[--f]=data;
+    else if(front>0){
+        deque[--front]=data;
     }
     else{
         cout<<"No space"<<endl;
@@ -20,44 +20,44 @@ void fenqueue(vector<int> &deque, int data)
 
 void renqueue(vector<int> &deque, int data)
 {
-    if(r==-1){
-        deque[++r]=data;
-        f++;
+    if(rear==-1){
+        deque[++rear]=data;
+        front++;
     }
-    else if(r==MAX-1){
+    else if(rear==MAX-1){
         cout<<"Overflow"<<endl;
     }
     else{
-        deque[++r]=data;
+        deque[++rear]=data;
     }
 }
 
 void rdequeue(vector<int> &deque)
 {
-    if(r==-1){
+    if(rear==-1){
         cout<<"Underflow"<<endl;
     }
-    else if (f == r)
+    else if (front == rear)
     {
-        cout << "Element deleted is: " << deque[r]<<endl;
-        f = -1, r = -1;
+        cout << "Element deleted is: " << deque[rear]<<endl;
+        front = -1, rear = -1;
     }
     else{
-        cout << "Element deleted is: " << deque[r--]<<endl;
+        cout << "Element deleted is: " << deque[rear--]<<endl;
         
     }
 }
 void fdequeue(vector<int> &deque)
 {
-    if(f==-1) cout<<"Underflow"<<endl;
-    else if (f == r)
+    if(front==-1) cout<<"Underflow"<<endl;
+    else if (front == rear)
     {
-        cout << "Element deleted is: " << deque[r]<<endl;
-        f = -1, r = -1;
+        cout << "Element deleted is: " << deque[rear]<<endl;
+        front = -1, rear = -1;
     }
     else
     {
-        cout << "Element deleted is: " << deque[f++]<<endl;
+        cout << "Element deleted is: " << deque[front++]<<endl;
     }
     
 }
