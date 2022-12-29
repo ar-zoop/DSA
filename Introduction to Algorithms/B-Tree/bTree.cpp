@@ -13,6 +13,7 @@ typedef struct BTreeNode{
 
 }node;
 
+
 node *root;
 
 node* create_node(){
@@ -266,7 +267,7 @@ void delete_key(node *nodeToDelete, int key){
                 for (int i = 0; i < rightSibling->numKeys; i++)
                 {
                     nodeToDelete->child[i] = rightSibling->child[i];
-                    nodeToDelete->key[i] = right`Sibling->key[i];
+                    nodeToDelete->key[i] = rightSibling->key[i];
                 }
                 nodeToDelete->numKeys += rightSibling->numKeys;
                 // replace the keyToDelete with the parents key
@@ -382,6 +383,7 @@ void delete_key(int key){
                 // CASE 4: merge
                 else{
                     if(leftSibling){
+                        int j = 0;
                         //copying leftchild keys into nodeToDelete keys.
                         for (int i = nodeToDelete->numKeys; i >= 0; i--)
                         {
@@ -614,13 +616,15 @@ int main(){
     insert(root, Child, 4);
     insert(root, Child, 5);
     // cout<<search(root,10)<<endl;
-    cout << search(root, 1);
+    cout << search(root, 1)<<endl;
     // cout << search(root, 1);
     // cout << search(root, 99);
-    cout << search(root, 2);
-    cout << search(root, 3);
-    cout << search(root, 4);
-    cout << search(root, 5);
+    cout << search(root, 2) << endl;
+
+    cout << search(root, 3) << endl;
+    cout << search(root, 4) << endl;
+    cout << search(root, 5) << endl;
+    delete_key(root,2);
     return 0;
 
 } 
